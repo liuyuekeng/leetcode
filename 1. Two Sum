@@ -1,0 +1,19 @@
+/**
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number[]}
+ */
+var twoSum = function(nums, target) {
+    var toTargetList = [];
+    var toTarget;
+    var current;
+    var len = nums.length;
+    for (var i = 0; i < len; i ++) {
+        current = nums[i];
+        if (toTargetList.indexOf(current) > -1) {
+            return [toTargetList.indexOf(current),  i];
+        }
+        toTarget = target - current;
+        toTargetList[i] = toTarget;
+    }
+};
