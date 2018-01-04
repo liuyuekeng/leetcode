@@ -1,0 +1,25 @@
+/**
+ * @param {string} s
+ * @return {number}
+ */
+var lengthOfLongestSubstring = function(s) {
+    var len = s.length;
+    if (!len) {
+        return 0;
+    }
+    var hi = 0;
+    var ti = 0;
+    var res = 0;
+    var map = s[0];
+    while (hi < len && ti <len) {
+        res = Math.max(res, ti - hi + 1);
+        ti ++;
+        if (map.indexOf(s[ti]) > -1) {
+            hi = map.indexOf(s[ti]) + hi + 1;
+            map = s.slice(hi, ti + 1);
+        } else {
+            map += s[ti];
+        }
+    }
+    return res;
+};
