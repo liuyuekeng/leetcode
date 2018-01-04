@@ -1,0 +1,52 @@
+/**
+ * @param {number[]} nums1
+ * @param {number[]} nums2
+ * @return {number}
+ */
+var findMedianSortedArrays = function(nums1, nums2) {
+    var n = nums1.length;
+    var m = nums2.length;
+    if (n > m) {
+        var tmp = n;
+        n = m;
+        m = tmp;
+        var tmparr = nums2;
+        nums2 = nums1;
+        nums1 = tmparr;
+    }
+    var min = 0;
+    var max = n;
+    var half = Math.floor((n + m + 1) / 2)
+    var i;
+    var j;
+    while (min <= max) {
+        i = Math.floor((min + max + 1) / 2);
+        j = half - i;
+        if (i < max && nums1[i] < nums2[j-1]) {
+            min = i + 1;
+        } else if (i > 0 && nums1[i-1] > nums2[j]) {
+            max = i - 1;
+        } else {
+            var leftMax;
+            if (i === 0) {
+                leftMax = nums2[j - 1];
+            } else if (j === 0) {
+                leftMax = nums1[i - 1];
+            } else {
+                leftMax = Math.max(nums1[i-1], nums2[j - 1]);
+            }
+            if ((m + n) % 2 === 1) {
+                return leftMax;
+            }
+            var rightMin;
+            if (i === n) {
+                rightMin = nums2[j];
+            } else if (j === m) {
+                rightMin = nums1[i];
+            } else {
+                rightMin = Math.min(nums1[i], nums2[j])
+            }
+            return (leftMax + rightMin) / 2;
+        }
+    }
+};
