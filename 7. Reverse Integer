@@ -1,0 +1,30 @@
+/**
+ * @param {number} x
+ * @return {number}
+ */
+var reverse = function(x) {
+    var flag = x < 0;
+    var a = x;
+    var arr = [];
+    if (flag) {
+        a = -x;
+    }
+    var nozeroflag = false;
+    while(a > 0) {
+        var i = a % 10;
+        a = Math.floor(a / 10);
+        if (i || nozeroflag) {
+            nozeroflag = true;
+            arr.push(i);
+        }
+    }
+    var len = arr.length;
+    var res = 0;
+    for (var i = 0; i < len; i ++) {
+        res += arr[i] * Math.pow(10, len - i -1);
+    }
+    if (flag) {
+        res = -res;
+    }
+    return (res > 2147483647 || res < -2147483648) ? 0 : res;
+};
