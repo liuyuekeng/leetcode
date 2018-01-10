@@ -1,0 +1,31 @@
+/**
+ * @param {string} s
+ * @param {number} numRows
+ * @return {string}
+ */
+var convert = function(s, numRows) {
+    var res = '';
+    var map = new Array(s.length);
+    var gap = 2 * numRows - 2;
+    var len = s.length;
+    if (numRows === 1) {
+        return s;
+    }
+    for (i = 0; i < numRows; i ++) {
+        var j = i;
+        while (j < len) {
+            var index1 = j;
+            var index2 = j + (numRows - i) * 2 -2;
+            if (!map[index1]) {
+                res += s[index1];
+                map[index1] = true;
+            }
+            if (index2 < len && !map[index2]) {
+                res += s[index2];
+                map[index2] = true;
+            }
+            j += gap;   
+        } 
+    }
+    return res;
+};
